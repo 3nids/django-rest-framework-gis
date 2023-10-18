@@ -20,7 +20,6 @@ class BaseModel(models.Model):
     name = models.CharField(max_length=32)
     slug = models.SlugField(max_length=128, unique=True, blank=True)
     timestamp = models.DateTimeField(null=True, blank=True)
-    geometry = models.GeometryField()
 
     class Meta:
         abstract = True
@@ -45,14 +44,14 @@ class BaseModel(models.Model):
 
 
 class Location(BaseModel):
-    pass
+    geometry = models.GeometryField(null=True, blank=True)
 
 
-class LocatedFile(BaseModel):
+class LocatedFile(Location):
     file = models.FileField(upload_to='located_files', blank=True, null=True)
 
 
-class BoxedLocation(BaseModel):
+class BoxedLocation(Location):
     bbox_geometry = models.PolygonField()
 
 

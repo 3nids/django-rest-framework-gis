@@ -634,6 +634,16 @@ class TestRestFrameworkGis(TestCase):
         self.assertEqual(response.data['properties']['name'], 'None value')
         self.assertEqual(response.data['geometry'], None)
 
+    def test_geometry_serializer_method_field_nogeo(self):
+        location = Location.objects.create(name='No geometry value')
+        location_loaded = Location.objects.get(pk=location.id)
+        self.assertEqual(location_loaded.name, "No geometry value")
+        url = reverse('api_geojson_location_details_nogeo', args=[location.id])
+        response = self.client.generic('GET', url, content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data['properties']['name'], 'No geometry value')
+        self.assertEqual(response.data['geometry'], None)
+
     def test_nullable_empty_geometry(self):
         empty = Nullable(name='empty', geometry='POINT EMPTY')
         empty.full_clean()

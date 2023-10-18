@@ -185,6 +185,13 @@ class NoneGeoFeatureMethodSerializer(gis_serializers.GeoFeatureModelSerializer):
         fields = ['name', 'slug', 'id']
 
 
+class NoGeoFeatureMethodSerializer(gis_serializers.GeoFeatureModelSerializer):
+    class Meta:
+        model = Location
+        geo_field = None
+        fields = ['name', 'slug', 'id']
+
+
 class PointSerializer(gis_serializers.GeoFeatureModelSerializer):
     class Meta:
         model = PointModel

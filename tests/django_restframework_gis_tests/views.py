@@ -23,6 +23,7 @@ from .serializers import (
     LocationGeoFeatureSlugSerializer,
     LocationGeoFeatureWritableIdSerializer,
     LocationGeoSerializer,
+    NoGeoFeatureMethodSerializer,
     NoneGeoFeatureMethodSerializer,
     PaginatedLocationGeoSerializer,
     PolygonModelSerializer,
@@ -165,6 +166,15 @@ class GeojsonLocationDetailsNone(generics.RetrieveUpdateDestroyAPIView):
 
 
 geojson_location_details_none = GeojsonLocationDetailsNone.as_view()
+
+
+class GeojsonLocationDetailsNoGeo(generics.RetrieveUpdateDestroyAPIView):
+    model = Location
+    serializer_class = NoGeoFeatureMethodSerializer
+    queryset = Location.objects.all()
+
+
+geojson_location_details_nogeo = GeojsonLocationDetailsNoGeo.as_view()
 
 
 class GeojsonLocationSlugDetails(generics.RetrieveUpdateDestroyAPIView):
