@@ -43,15 +43,22 @@ class BaseModel(models.Model):
         super().save(*args, **kwargs)
 
 
-class Location(BaseModel):
-    geometry = models.GeometryField(null=True, blank=True)
+class BaseModelGeometry(BaseModel):
+    class Meta:
+        abstract = True
+
+    geometry = models.GeometryField()
 
 
-class LocatedFile(Location):
+class Location(BaseModelGeometry):
+    pass
+
+
+class LocatedFile(BaseModelGeometry):
     file = models.FileField(upload_to='located_files', blank=True, null=True)
 
 
-class BoxedLocation(Location):
+class BoxedLocation(BaseModelGeometry):
     bbox_geometry = models.PolygonField()
 
 
