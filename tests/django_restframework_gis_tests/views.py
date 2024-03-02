@@ -168,13 +168,13 @@ class GeojsonLocationDetailsNone(generics.RetrieveUpdateDestroyAPIView):
 geojson_location_details_none = GeojsonLocationDetailsNone.as_view()
 
 
-class GeojsonLocationDetailsNoGeo(generics.RetrieveUpdateDestroyAPIView):
-    model = Location
+class GeojsonNullableDetailsNoGeo(generics.RetrieveUpdateDestroyAPIView):
+    model = Nullable
     serializer_class = NoGeoFeatureMethodSerializer
-    queryset = Location.objects.all()
+    queryset = Nullable.objects.all()
 
 
-geojson_location_details_nogeo = GeojsonLocationDetailsNoGeo.as_view()
+geojson_nullable_details_nogeo = GeojsonNullableDetailsNoGeo.as_view()
 
 
 class GeojsonLocationSlugDetails(generics.RetrieveUpdateDestroyAPIView):
