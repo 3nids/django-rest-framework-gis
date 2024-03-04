@@ -96,7 +96,9 @@ class GeoFeatureModelSerializer(ModelSerializer):
                     meta.fields += additional_fields
 
         check_excludes(meta.geo_field, 'geo_field')
-        add_to_fields(meta.geo_field)
+
+        if meta.geo_field is not None:
+            add_to_fields(meta.geo_field)
 
         meta.bbox_geo_field = getattr(meta, 'bbox_geo_field', None)
         if meta.bbox_geo_field:
